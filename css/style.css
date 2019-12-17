@@ -3,7 +3,7 @@
   padding: 20px;
   background-color: #2dad38; /* Red */
   color: white;
-  margin-bottom: 15px;
+  margin: 15px;
   width: 15em;
 }
 
@@ -11,15 +11,15 @@
   padding: 20px;
   background-color: #f44336; /* Red */
   color: white;
-  margin-bottom: 15px;
-  width: 15em;
+  margin: 15px;
+  width: 20em;
 }
 
 .created {
     padding: 20px;
     background-color: #2759b4; /* Red */
     color: white;
-    margin-bottom: 15px;
+    margin: 15px;
     width: 15em;
 }
 

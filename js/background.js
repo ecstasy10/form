@@ -29,11 +29,12 @@ function tab (show, hide, focus){
 *        document.cookie = "user=username"
 */
 
-function saveCookie(nameCookie, valueCookie, expireDays) {
+function setCookie(nameCookie, valueCookie, expireDays) {
     var date = new Date()
     date.setTime(date.getTime() + (expireDays * 24 * 60 * 60 * 1000))
     var expire = "expire=" + date.toUTCString()
     document.cookie = nameCookie + "=" + valueCookie + ";" + expire + ";path=/"
+    //Set-Cookie: id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT; Secure; HttpOnly
     console.log("%cCookies created!", 'background: #222; color: white')
 }
 
@@ -54,12 +55,24 @@ function getCookie(nameCookie) {
     return  null
 }
 
+function checkCookie() {
+    var user = getCookie("username");
+    if (user != "") {
+        alert("Welcome again " + user);
+    } else {
+        user = prompt("Please enter your name:", "");
+        if (user != "" && user != null) {
+            setCookie("username", user, 365);
+        }
+    }
+} 
+
 /*
 ################################################
-################# Sign in ######################
+################# Buttons ######################
 ################################################
 */
-
+/*
 var cookies = {
     name: document.getElementById("name").value,
     surname: document.getElementById("surname").value,
@@ -68,61 +81,82 @@ var cookies = {
     passconf: document.getElementById("passwdConfirm").value,
     birth: document.getElementById("birth").value
 }
+for (var [key, value] of Object.entries(cookies)) {
+    setCookie(key, value, 1)
+    console.log("key: " + key);
+}
+*/
 
 document.getElementById("sign").addEventListener('click', function () {
-    for (var [key, value] of Object.entries(cookies)) {
-        saveCookie(key, value, 1)
-    } 
+    var pass = document.getElementById("passwd").value
+    var passC = document.getElementById("passwdConfirm").value
 
-    console.log(document.cookie)
-    console.log("Cookies added")
+    if (pass != passC || pass == "" || pass == "")
+        document.getElementById("incorrectPass").style.display = "block"
+    else {
+        setCookie("contact", document.getElementById("contact").value, 1)
+        setCookie("pass", pass, 1)
+        setCookie("passconf", passC, 1)
+        document.getElementById("incorrectPass").style.display = "none"
+        console.log(document.cookie)
+        console.log("Cookies added")
+    }
+
 })
 
 document.getElementById("log").addEventListener('click', function () {
-    var user = document.getElementById("user").value
-    var pass = document.getElementById("pass").value
-    console.log(user)
-    console.log(pass)
+    var userSession = document.getElementById("user").value
+    var passSession = document.getElementById("pass").value
+    console.log(userSession)
+    console.log(passSession)
     //console.log("The user name is: " + getCookie("user"));
-    if (user == getCookie("contact") && pass == getCookie("pass")){
+    if (userSession == getCookie("contact") && passSession == getCookie("pass")){
         document.getElementById("correct").style.display = "block"
         document.getElementById("incorrect").style.display = "none"
+        document.getElementById("logout-button").style.display = ""
+        document.getElementById("reg-button").style.display = "none"
+        document.getElementById("login-button").style.display = "none"
         console.log("user correct")
+        setCookie("userSession", userSession, 0.041667)
+        setCookie("passSession", passSession, 0.041667)
+        console.log("%cSession Created! Cookies lasts for 1h.", 'background: #222; color: green')
     }
     else {
         document.getElementById("incorrect").style.display = "block"
         document.getElementById("correct").style.display = "none"
-        console.log("user correct")
+        console.log("user incorrect")
     }
     console.log(document.cookie)
     console.log("Cookie checked")
 })
 
-/*
-################################################
-############ Show me the cookies ###############
-################################################
-*/
-
-document.getElementById("show-button").addEventListener('click', function (){
-    for (var [key, value] of Object.entries(cookies)) {
-        //esto hay que cambiarlo y llamar a las cookies no al objeto
-        document.getElementById("info").innerHTML += key + ": " + value + "<br>"
-        console.log(key)
-        console.log(value)
+function delete_cookie(name, path, domain) {
+    if (getCookie(name)) {
+        document.cookie = name + "=" +
+            ((path) ? ";path=" + path : "") +
+            ((domain) ? ";domain=" + domain : "") +
+            ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
     }
-})
+}
 
-document.getElementById("delete-button").addEventListener('click', function () {
-    var cookies = document.cookie.split(";")
-
-    for (var i = 0; i < cookies.length; i++) {
-        var cookie = cookies[i]
-        var eqPos = cookie.indexOf("=")
-        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie
-        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT"
-    }
-    console.log("%cCookies Deleted!.", 'background: #222; color: red')
+document.getElementById("logout-button").addEventListener('click', function () {
+    delete_cookie("userSession")
+    delete_cookie("passSession")
+    location.reload()
 })
 
 
+
+/* ########## show password ################ */
+function showPasswd() {
+    var show = document.getElementById("passwd");
+    var showC = document.getElementById("passwdConfirm");
+
+    if (show.type == "password" && showC.type == "password" ) {
+        show.type = "text";
+        showC.type = "text";
+    } else {
+        show.type = "password";
+        showC.type = "password";
+    }
+}
