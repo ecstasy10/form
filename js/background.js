@@ -87,6 +87,7 @@ for (var [key, value] of Object.entries(cookies)) {
 }
 */
 
+/* ######### PassWord Validation ######### */
 document.getElementById("sign").addEventListener('click', function () {
     var pass = document.getElementById("passwd").value
     var passC = document.getElementById("passwdConfirm").value
@@ -130,13 +131,9 @@ document.getElementById("log").addEventListener('click', function () {
     console.log("Cookie checked")
 })
 
-function delete_cookie(name, path, domain) {
-    if (getCookie(name)) {
-        document.cookie = name + "=" +
-            ((path) ? ";path=" + path : "") +
-            ((domain) ? ";domain=" + domain : "") +
-            ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
-    }
+function delete_cookie(name) {
+    document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    console.log("%cCookies Deleted!.", 'background: #222; color: orange')
 }
 
 document.getElementById("logout-button").addEventListener('click', function () {
@@ -148,15 +145,25 @@ document.getElementById("logout-button").addEventListener('click', function () {
 
 
 /* ########## show password ################ */
-function showPasswd() {
-    var show = document.getElementById("passwd");
-    var showC = document.getElementById("passwdConfirm");
+function showPasswd(field1, field2) {
+    var show = document.getElementById(field1)
+    var show2 = document.getElementById(field2)
 
-    if (show.type == "password" && showC.type == "password" ) {
+    if (show.type == "password") {
         show.type = "text";
-        showC.type = "text";
+        if (show2)
+            show2.type = "text";
     } else {
         show.type = "password";
-        showC.type = "password";
+        if (show2)
+            show2.type = "password";
     }
 }
+
+/*
+################################################
+################# Validate #####################
+################################################
+*/
+
+var email = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
