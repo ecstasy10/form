@@ -4,7 +4,7 @@
 
 La página web consta de dos formularios, uno para registrarse y otro para login.
 
-### El formulario de registro
+### Formulario registro
 Recoje los siguientes campos
 
   - Name, será obligatorio escribir un nombre con letras.
@@ -14,13 +14,13 @@ Recoje los siguientes campos
   - Confirmar contraseña, obligatorio, para mayor seguridad al crear la contraseña.
   - Año nacimiento, opcional.
 
-### El formulario de Login
+### Formulario Login
 Recoje los siguientes campos
 
   - Contacto, será obligatorio (eMail / Teléfono).
   - Contraseña, obligatoria.
 
-## Implementación Cookies
+## Cookies
 Para la implementación de las cookies he creado el siguiente modelo:
   
   - Cuando se crea el usuario, se crearán 2 cookies. Estas contendran el contacto (Email/Telefono) y la contraseña.
