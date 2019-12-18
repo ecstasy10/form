@@ -30,4 +30,4 @@ Para la implementación de las cookies he creado el siguiente modelo:
   - Por defecto las cookies se borran al cerrar el navegador.
 
 
-Si se activa la consola se puede ver todo el procedimiento de las cookies.
+_Si se activa la consola se puede ver todo el procedimiento de las cookies._
