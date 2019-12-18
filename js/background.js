@@ -1,7 +1,7 @@
-/* 
+/*
 ################################################
 ################### Menu #######################
-################################################ 
+################################################
 */
 
 document.getElementById("reg-button").addEventListener('click', function () {
@@ -14,7 +14,7 @@ document.getElementById("login-button").addEventListener('click', function () {
 
 function tab (show, hide, focus){
     document.getElementById(show).style.display = "block"
-    document.getElementById(focus).focus() 
+    document.getElementById(focus).focus()
     document.getElementById(hide).style.display = "none"
 }
 
@@ -56,16 +56,29 @@ function getCookie(nameCookie) {
 }
 
 function checkCookie() {
-    var user = getCookie("username");
-    if (user != "") {
-        alert("Welcome again " + user);
-    } else {
-        user = prompt("Please enter your name:", "");
-        if (user != "" && user != null) {
-            setCookie("username", user, 365);
-        }
+    if (getCookie("userSession"))
+        return (1)
+    return(0)
+}
+
+/*
+################################################
+############ If Session Active #################
+################################################
+*/
+
+window.onload = function () {
+
+    if (checkCookie()){
+    tab("login", "register", "user")
+    document.getElementById("logout-button").style.display = ""
+    document.getElementById("reg-button").style.display = "none"
+    document.getElementById("login-button").style.display = "none"
+    document.getElementById("again").style.display = ""
+    document.getElementById("incorrect").style.display = "none"
+    document.getElementById("correct").style.display = "none"
     }
-} 
+}
 
 /*
 ################################################
@@ -80,8 +93,10 @@ function get_submit(){
 document.getElementById("sign").addEventListener('click', function () {
     var pass = document.getElementById("passwd").value
     var passC = document.getElementById("passwdConfirm").value
+    var name = document.getElementById("name").value
+    var surname = document.getElementById("surname").value
 
-    if (pass == passC && (pass != "" && pass != ""))
+    if (pass == passC && pass != "" && pass != "" && name != "" && surname != "")
     {
         setCookie("contact", document.getElementById("contact").value, 1)
         setCookie("pass", pass, 1)
@@ -91,11 +106,10 @@ document.getElementById("sign").addEventListener('click', function () {
         console.log(document.cookie)
         console.log("Cookies added")
     }
-    else
-        document.getElementById("incorrectPass").style.display = ""
 })
 
 document.getElementById("log").addEventListener('click', function () {
+
     var userSession = document.getElementById("user").value
     var passSession = document.getElementById("pass").value
     console.log(userSession)
@@ -149,3 +163,100 @@ function showPasswd(field1, field2) {
             show2.type = "password"
     }
 }
+
+/*
+################################################
+################# Alerts #######################
+################################################
+*/
+
+var myInput = document.getElementById("passwd");
+var myInput2 = document.getElementById("passwdConfirm");
+var letter = document.getElementById("letter");
+var capital = document.getElementById("capital");
+var number = document.getElementById("number");
+var length = document.getElementById("length");
+var match = document.getElementById("match");
+
+myInput.onfocus = function() {
+    document.getElementById("message").style.display = "block";
+  }
+
+myInput2.onfocus = function() {
+document.getElementById("message").style.display = "block";
+}
+/*
+myInput.onblur = function() {
+    document.getElementById("message").style.display = "none";
+  }
+
+myInput2.onblur = function() {
+document.getElementById("message").style.display = "none";
+}*/
+
+myInput.onkeyup = function (){
+    validate()
+}
+
+myInput2.onkeyup = function (){
+    validate()
+}
+
+function validate() {
+
+    // Validate lowercase letters
+    var lowerCaseLetters = /[a-z]/g;
+    if(myInput.value.match(lowerCaseLetters)) {
+      letter.classList.remove("invalid");
+      letter.classList.add("valid");
+    } else {
+      letter.classList.remove("valid");
+      letter.classList.add("invalid");
+  }
+
+    // Validate capital letters
+    var upperCaseLetters = /[A-Z]/g;
+    if(myInput.value.match(upperCaseLetters)) {
+      capital.classList.remove("invalid");
+      capital.classList.add("valid");
+    } else {
+      capital.classList.remove("valid");
+      capital.classList.add("invalid");
+    }
+
+    // Validate numbers
+    var numbers = /[0-9]/g;
+    if(myInput.value.match(numbers)) {
+      number.classList.remove("invalid");
+      number.classList.add("valid");
+    } else {
+      number.classList.remove("valid");
+      number.classList.add("invalid");
+    }
+
+    // Validate length
+    if(myInput.value.length >= 8) {
+      length.classList.remove("invalid");
+      length.classList.add("valid");
+    } else {
+      length.classList.remove("valid");
+      length.classList.add("invalid");
+    }
+
+    //Validate matching passwords
+    if (myInput.value == myInput2.value && (myInput.value != "" && myInput2.value != "" )){
+        match.classList.remove("invalid");
+        match.classList.add("valid");
+    } else {
+        match.classList.remove("valid");
+        match.classList.add("invalid");
+    }
+
+    //Hide if all ok
+    if (letter.classList.value == "valid" &&
+    capital.classList.value == "valid" &&
+    number.classList.value == "valid" &&
+    length.classList.value == "valid" &&
+    match.classList.value == "valid")
+        document.getElementById("message").style.display = "none";
+  }
