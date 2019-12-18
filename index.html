@@ -21,11 +21,17 @@
         <div id="register"> 
             <h2>Register</h2>
             <div class="text-form">
-                <!--<form>-->
+                <form onsubmit="get_submit()">
                     Name *<br>
-                    <input type="text" name="name" id="name" autofocus="autofocus" required> <br>
+                    <input type="text" name="name" id="name" autofocus="autofocus"
+                    pattern="[A-Za-zÑñ]{1,32}"
+                    title="Must contain only letters"
+                    required> <br>
                     Surname *<br>
-                    <input type="text" name="surname" id="surname" required> <br>
+                    <input type="text" name="surname" id="surname"
+                    pattern="[A-Za-zÑñ]{1,32}"
+                    title="Must contain only letters"
+                    required> <br>
                     Contact (eMail / Phone) *<br>
                     <input type="text" name="contact" id="contact"
                     pattern="^([0-9]{9})|([A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3})$"
@@ -57,32 +63,34 @@
                             <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                         </div>
                     </div>
-                <!--</form>-->
+                </form>
         </div>
         <div id="login" style="display: none;">
-            <h2>Login</h2>
-            <input type="text" name="user" id="user" placeholder="eMail or Phone..." 
-            pattern="^([0-9]{9})|([A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3})$"
-            title="Must be a valid eMail or Phone"
-            required> <br>
-            <input type="password" name="pass" id="pass" placeholder="Password..."
-            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
-            title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
-            required> 
-            <button type="button" onclick="showPasswd('pass')"><i class="far fa-eye"></i></button> <br><br>
-            <div class="submit">
-                <input type="submit" value="Log in" id="log">
-            </div>
-            <div class="session">
-                <div class="correct" style="display: none;" id="correct">
-                    User authentified!
-                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                </div>
-                <div class="incorrect" style="display: none;" id="incorrect">
-                    Incorrect username or password.
-                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                </div>
-            </div>
+            <form onsubmit="get_submit()">
+                <h2>Login</h2>
+                    <input type="text" name="user" id="user" placeholder="eMail or Phone..." 
+                    pattern="^([0-9]{9})|([A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3})$"
+                    title="Must be a valid eMail or Phone"
+                    required> <br>
+                    <input type="password" name="pass" id="pass" placeholder="Password..."
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+                    title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                    required> 
+                    <button type="button" onclick="showPasswd('pass')"><i class="far fa-eye"></i></button> <br><br>
+                    <div class="submit">
+                        <input type="submit" value="Log in" id="log">
+                    </div>
+                    <div class="session">
+                        <div class="correct" style="display: none;" id="correct">
+                            User authentified!
+                            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                        </div>
+                        <div class="incorrect" style="display: none;" id="incorrect">
+                            Incorrect username or password.
+                            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                        </div>
+                    </div>
+            </form>
         </div>
         <div class="info" id="info">
         </div>

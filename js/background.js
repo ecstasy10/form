@@ -14,7 +14,7 @@ document.getElementById("login-button").addEventListener('click', function () {
 
 function tab (show, hide, focus){
     document.getElementById(show).style.display = "block"
-    document.getElementById(focus).focus()
+    document.getElementById(focus).focus() 
     document.getElementById(hide).style.display = "none"
 }
 
@@ -72,37 +72,27 @@ function checkCookie() {
 ################# Buttons ######################
 ################################################
 */
-/*
-var cookies = {
-    name: document.getElementById("name").value,
-    surname: document.getElementById("surname").value,
-    contact: document.getElementById("contact").value,
-    pass: document.getElementById("passwd").value,
-    passconf: document.getElementById("passwdConfirm").value,
-    birth: document.getElementById("birth").value
-}
-for (var [key, value] of Object.entries(cookies)) {
-    setCookie(key, value, 1)
-    console.log("key: " + key);
-}
-*/
 
-/* ######### PassWord Validation ######### */
+function get_submit(){
+    event.preventDefault()
+}
+
 document.getElementById("sign").addEventListener('click', function () {
     var pass = document.getElementById("passwd").value
     var passC = document.getElementById("passwdConfirm").value
 
-    if (pass != passC || pass == "" || pass == "")
-        document.getElementById("incorrectPass").style.display = "block"
-    else {
+    if (pass == passC && (pass != "" && pass != ""))
+    {
         setCookie("contact", document.getElementById("contact").value, 1)
         setCookie("pass", pass, 1)
         setCookie("passconf", passC, 1)
         document.getElementById("incorrectPass").style.display = "none"
+        tab("login", "register", "user")
         console.log(document.cookie)
         console.log("Cookies added")
     }
-
+    else
+        document.getElementById("incorrectPass").style.display = ""
 })
 
 document.getElementById("log").addEventListener('click', function () {
@@ -112,7 +102,7 @@ document.getElementById("log").addEventListener('click', function () {
     console.log(passSession)
     //console.log("The user name is: " + getCookie("user"));
     if (userSession == getCookie("contact") && passSession == getCookie("pass")){
-        document.getElementById("correct").style.display = "block"
+        document.getElementById("correct").style.display = ""
         document.getElementById("incorrect").style.display = "none"
         document.getElementById("logout-button").style.display = ""
         document.getElementById("reg-button").style.display = "none"
@@ -150,20 +140,12 @@ function showPasswd(field1, field2) {
     var show2 = document.getElementById(field2)
 
     if (show.type == "password") {
-        show.type = "text";
+        show.type = "text"
         if (show2)
-            show2.type = "text";
+            show2.type = "text"
     } else {
-        show.type = "password";
+        show.type = "password"
         if (show2)
-            show2.type = "password";
+            show2.type = "password"
     }
 }
-
-/*
-################################################
-################# Validate #####################
-################################################
-*/
-
-var email = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
