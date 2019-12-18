@@ -100,7 +100,6 @@ document.getElementById("sign").addEventListener('click', function () {
     {
         setCookie("contact", document.getElementById("contact").value, 1)
         setCookie("pass", pass, 1)
-        setCookie("passconf", passC, 1)
         document.getElementById("incorrectPass").style.display = "none"
         tab("login", "register", "user")
         console.log(document.cookie)
@@ -129,6 +128,9 @@ document.getElementById("log").addEventListener('click', function () {
     else {
         document.getElementById("incorrect").style.display = "block"
         document.getElementById("correct").style.display = "none"
+        document.getElementById("logout-button").style.display = "none"
+        document.getElementById("reg-button").style.display = ""
+        document.getElementById("login-button").style.display = ""
         console.log("user incorrect")
     }
     console.log(document.cookie)
@@ -185,14 +187,6 @@ myInput.onfocus = function() {
 myInput2.onfocus = function() {
 document.getElementById("message").style.display = "block";
 }
-/*
-myInput.onblur = function() {
-    document.getElementById("message").style.display = "none";
-  }
-
-myInput2.onblur = function() {
-document.getElementById("message").style.display = "none";
-}*/
 
 myInput.onkeyup = function (){
     validate()
