@@ -28,3 +28,6 @@ Para la implementación de las cookies he creado el siguiente modelo:
   - Si el usuario se ha autentificado correctamente, tendrá la opción de un botón de Logout el cual cerrará la session y eliminará las cookies creadas.
   - Si el usuario no presiona el boton de Logout pero cierra esa pestaña y se vuelve a logear en menos de 1 hora, seguirá autentificado.
   - Por defecto las cookies se borran al cerrar el navegador.
+
+
+Si se activa la consola se puede ver todo el procedimiento de las cookies.
