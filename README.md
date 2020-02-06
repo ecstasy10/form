@@ -31,3 +31,26 @@ Para la implementación de las cookies he creado el siguiente modelo:
 
 
 _Si se activa la consola se puede ver todo el procedimiento de las cookies._
+
+## Tests Manuales Probados
+
+Prueba introducir datos vacios _Formulario Registro_:
+  - Si intentamos validar con algún campo vacío nos pedirá que rellenemos cada uno de los campos vacios.
+  - Al clickear sobre el campo de contraseña, nos saldrá un mensaje de alerta para enseñarnos si la contraseña cumple todos los requisitos, en caso de no ser así, no nos dejará validar.
+  
+Prueba introducir datos erroneos _Formulario Registro_:
+  Name: En el caso de que introduzcamos cualquier caracter que no sean letras, no nos dejará validar. También se contempla la Ñ y ñ. Mínimo 1 y Máximo 32 caracteres.
+  Surname: En el caso de que introduzcamos cualquier caracter que no sean letras, no nos dejará validar. También se contempla la Ñ y ñ. Mínimo 1 y Máximo 32 caracteres.
+  Contact: Podremos introducir un número de telefono de 9 digitos obligatorios o, un correo electrónico, en el caso de que el correo no tenga '@' y '.' no nos dejará validar el formulario.
+  Password: En el caso de que no se complete el formato solicitado (1 letra minuscula al menos, 1 letra mayuscula al menos, 1 número al menos, 8 caracteres mínimo, las dos contraseñas deben ser iguales), no nos dejará validar el formulario.
+  ConfirmPassword: Sigue las mismas directrices que el campo password. Ambos campos deben estar rellenos exactamente igual.
+  Birth Date: Solo se puede insertar fechas mediante el objeto HTML, por lo tanto no hay fallo.
+  
+Prueba introducir datos erroneos _Formulario Login_:
+  Email-Phone: Siguen las mismas directrices que el campo de contacto del formulario de registro. En el caso de que se introduzca un contacto que no exista en la cookie, nos mostrará un mensaje de alerta en rojo, informándonos de que no se ha podido logear el usuario o que no existe.
+  Password: Sigue las mismas directrices que el campo de Password del formulario de registro. Buscará si la cookie almacenada con la contraseña contiene el mismo nombre, en caso de no ser así, mostrará el mensaje de alerta rojo.
+  
+Prueba campos vacios en el _Formulario Login_:
+  - Si introducimos un usuario en blanco, nos saldrá un pop-up que nos pedirá rellenarlo para poder continuar.
+  - Si no introducimos contraseña al validar nos saldrá un mensaje de error.
+  
